@@ -33,10 +33,13 @@ class Agent():
         self.action_size = action_size
         self.seed = random.seed(seed)
 
-        # Q-Network
+        # For informational purposses print the devise on which the computations are done
         print("Working on device:", device)
+        # Q-Networks: we initialize two networks for the action value function the 'standard' one
+        # which we call local and the one we only update softly which we call target 
         self.qnetwork_local = QNetwork(state_size, action_size, seed).to(device)
         self.qnetwork_target = QNetwork(state_size, action_size, seed).to(device)
+        # define the optimizer which is used for learning
         self.optimizer = optim.Adam(self.qnetwork_local.parameters(), lr=LR)
 
         # Replay memory
